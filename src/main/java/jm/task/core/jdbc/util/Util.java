@@ -3,18 +3,15 @@ package jm.task.core.jdbc.util;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class Util {
-    public static Connection connection;
-
-    {
-        static {
-        try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/pp_1_1_3", "root", "root");
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
+    public static Connection getConnection() throws ClassNotFoundException, SQLException {
+        String userName = "root";
+        String password = "root";
+        String connectionURL = "jdbc:mysql://localhost:3306/mydbtest";
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection connection = DriverManager.getConnection(connectionURL, userName, password);
+        return connection;
     }
 }
-
